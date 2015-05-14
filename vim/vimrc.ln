@@ -1,0 +1,102 @@
+source ~/.vim/plugins.vim
+autocmd BufWritePost vimrc.ln source %  " source this file on save
+
+" set a map leader for more key combos
+let mapleader="\<Space>"
+let maplocalleader="\<Space>"
+
+if has('mouse')
+	set mouse=a
+	set ttymouse=xterm2
+endif
+
+set noswapfile
+set backspace=2 " make backspace work like most other apps
+syntax on
+set clipboard=unnamed
+set cursorline
+
+" set relativenumber " show relative line numbers
+set number " show the current line number"
+" 
+" set wrap "turn on line wrapping
+" set wrapmargin=8 " wrap lines when coming within n characters from side
+" set linebreak " set soft wrapping
+" set showbreak=… " show ellipsis at breaking
+" 
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set autoindent " automatically set indent o new line
+set smartindent
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"map <F7> mzgg=G`z
+nmap <Leader>nn :NERDTreeTabsToggle<CR>
+
+" scroll the viewport faster
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeIgnore = ['\.DS_Store','\.pyc$']
+let NERDTreeShowHidden=1
+let g:nerdtree_tabs_open_on_console_startup=1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" Mark syntax errors with :signs
+let g:syntastic_enable_signs=1
+
+" Do not automatically jump to the error when saving the file
+" Jump feature is annoying to me as it automatically moves the cursor
+let g:syntastic_auto_jump=0
+
+" This is where the magic happens. Chain together different style checkers
+" in order to check for both style flaws and syntax errors.
+" Syntax checkers: https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
+"let g:syntastic_ruby_checkers=['rubocop', 'mri']
+"let g:syntastic_python_checkers=['pep8', 'pylint', 'python']
+let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_html_tidy_exec = 'tidy5'
+
+let g:tern_map_keys=1
+let g:tern_show_argument_hints='on_hold'
+
+let g:UltiSnipsExpandTrigger = "<nop>"
+"let g:UltiSnipsJumpForwardTrigger = "<nop>"
+inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
+"inoremap <C-q> UltiSnips#JumpBackwards<CR>
+"let g:UltiSnipsExpandTrigger="<CR>"
+let g:UltiSnipsJumpForwardTrigger="<CR>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-m>"
+
+"let g:UltiSnipsListSnippets="<C-@>"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => StatusLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set laststatus=2 " show the satus line all the time
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"":""}',
+      \ }
+      \ }
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+color Wombat256mod
+set colorcolumn=80
+highlight ColorColumn ctermbg=235
